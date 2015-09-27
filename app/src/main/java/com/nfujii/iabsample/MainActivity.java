@@ -1,4 +1,4 @@
-package com.nafujii.iabsample;
+package com.nfujii.iabsample;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -106,14 +106,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(com.nfujii.iabsample.R.layout.activity_main);
 
-        mBuyButton = (Button)findViewById(R.id.buy_button);
+        mBuyButton = (Button)findViewById(com.nfujii.iabsample.R.id.buy_button);
         mBuyButton.setOnClickListener(mBuyButtonListener);
         mBuyButton.setEnabled(false);
 
-        mPremium1MonthPriceView = (TextView)findViewById(R.id.premium_price_text);
-        mPremium1MonthTitleView = (TextView)findViewById(R.id.premium_title_text);
+        mPremium1MonthPriceView = (TextView)findViewById(com.nfujii.iabsample.R.id.premium_price_text);
+        mPremium1MonthTitleView = (TextView)findViewById(com.nfujii.iabsample.R.id.premium_title_text);
 
         Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
         // To protect the security of billing transactions, always make sure to explicitly set the intent's target package name to com.android.vending, using setPackage()
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(com.nfujii.iabsample.R.menu.menu_main, menu);
         return true;
     }
 
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == com.nfujii.iabsample.R.id.action_settings) {
             return true;
         }
 

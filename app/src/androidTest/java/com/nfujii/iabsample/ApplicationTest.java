@@ -1,4 +1,4 @@
-package com.nafujii.iabsample;
+package com.nfujii.iabsample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

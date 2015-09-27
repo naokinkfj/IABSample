@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "com.nafujii.iabsample"
+        applicationId "com.nfujii.iabsample"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
