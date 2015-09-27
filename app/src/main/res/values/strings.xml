@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">iabsample</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="product_name">商品名：</string>
+    <string name="price">価格：</string>
+    <string name="buy">購入</string>
+</resources>
