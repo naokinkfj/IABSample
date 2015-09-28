@@ -1,8 +1,10 @@
 package com.nfujii.iabsample;
 
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener mBuyButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            buy(PRODUCT_ID_PREMIUM_1MONTH);
         }
     };
 
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 mPremium1MonthPriceView.setText(mPremium1MonthPrice);
                                 mPremium1MonthTitleView.setText(mPremium1MonthTitle);
+                                mBuyButton.setEnabled(true);
                             }
                         }
                     }
@@ -153,5 +156,39 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1001) {
+            if (resultCode == RESULT_OK) {
+                String json = data.getStringExtra("INAPP_PURCHASE_DATA");
+                Log.d(TAG, json);
+            }
+        }
+    }
+
+    private void buy(String sku) {
+        try {
+            Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(), sku, "subs", "");
+            int response = buyIntentBundle.getInt("RESPONSE_CODE");
+            if (response == BILLING_RESPONSE_RESULT_OK) {
+
+            } else {
+                Log.e(TAG, "購入に失敗");
+            }
+
+            PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
+            if (pendingIntent != null) {
+                // 購入トランザクションを終了するために以下を呼ぶ
+                // 1001はリクエストコード
+                startIntentSenderForResult(pendingIntent.getIntentSender(),
+                        1001, new Intent(), 0, 0, 0);
+                // onActivityResultが呼ばれる
+            }
+        } catch (RemoteException | IntentSender.SendIntentException e) {
+            Log.d(TAG, "error", e);
+        }
+
     }
 }
